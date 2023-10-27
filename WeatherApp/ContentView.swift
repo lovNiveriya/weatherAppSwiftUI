@@ -22,16 +22,7 @@ struct ContentView: View {
                     ExtractedView(dayName: "Thus", imageName: "sun.rain.fill", temp: "20")
                 }
                 Spacer()
-                Button(action: {
-                    
-                }, label: {
-                    Text("Change DayTime")
-                        .font(.system(size: 16,weight: .bold))
-                        .frame(width: 280, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .background(Color.white)
-                        .cornerRadius(10.0)
-                        .foregroundColor(.blue)
-                })
+                WeatherButton(buttonText: "Change Daytime", foreGroundColor: .blue, backGroundColor: .white)
                 Spacer()
             }.padding()
         }
@@ -64,6 +55,7 @@ struct MainWeatherStatusView: View{
 }
 
 struct CityView: View{
+    
     var cityName: String
     
     var body: some View{
@@ -75,8 +67,10 @@ struct CityView: View{
 }
 
 struct BackGroundView: View{
+    
     var topColor: Color
     var bottomColor: Color
+    
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [topColor,bottomColor]), startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea(.all)
     }
@@ -84,9 +78,11 @@ struct BackGroundView: View{
 }
 
 struct ExtractedView: View {
+    
     var dayName: String
     var imageName: String
     var temp: String
+    
     var body: some View {
         VStack(alignment: .center){
             Text("\(dayName)")
@@ -103,4 +99,27 @@ struct ExtractedView: View {
                 .font(.system(size: 28, weight: .medium, design: .default))
         }.padding()
     }
+}
+
+//MARK: WeatherButton
+
+struct WeatherButton: View{
+    
+    var buttonText: String
+    var foreGroundColor: Color
+    var backGroundColor: Color
+    
+    var body: some View{
+        Button(action: {
+            
+        }, label: {
+            Text(buttonText)
+                .font(.system(size: 16,weight: .bold))
+                .frame(width: 280, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .background(backGroundColor)
+                .cornerRadius(10.0)
+                .foregroundColor(foreGroundColor)
+        })
+    }
+    
 }
