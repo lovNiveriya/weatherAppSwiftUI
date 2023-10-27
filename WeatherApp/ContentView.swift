@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  WeatherApp
 //
-//  Created by LOVE  on 22/10/23.
+//  Created by LOVE  on 22/10/23.̧̧
 //
 
 import SwiftUI
@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            BackGroundView(topColor: isNight ? .gray : .blue, bottomColor: .white)
+            BackGroundView(isNight: $isNight)
             VStack{
                 CityView(cityName: "Agra,UP")
                 MainWeatherStatusView(temperatue: "14 °C",
@@ -82,11 +82,10 @@ struct CityView: View{
 
 struct BackGroundView: View{
     
-    var topColor: Color
-    var bottomColor: Color
+    @Binding var isNight: Bool
     
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [topColor,bottomColor]), startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea(.all)
+        LinearGradient(gradient: Gradient(colors: [ isNight ? .gray : .blue ,.white]), startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea(.all)
     }
     
 }
