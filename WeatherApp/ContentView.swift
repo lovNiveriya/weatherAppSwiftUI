@@ -8,21 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isNight: Bool = false
+    
     var body: some View {
         ZStack{
-            BackGroundView(topColor: .blue, bottomColor: .white)
+            BackGroundView(topColor: isNight ? .gray : .blue, bottomColor: .white)
             VStack{
                 CityView(cityName: "Agra,UP")
-                MainWeatherStatusView(temperatue: "14", imageName: "cloud.sun")
+                MainWeatherStatusView(temperatue: "14 °C",
+                                      imageName: "cloud.sun")
                 HStack{
                     ExtractedView(dayName: "Mon", imageName: "sun.haze", temp:
                                     "75")
-                    ExtractedView(dayName: "Tue", imageName: "thermometer.sun", temp: "76")
-                    ExtractedView(dayName: "Wed", imageName: "sun.max.fill", temp: "100")
-                    ExtractedView(dayName: "Thus", imageName: "sun.rain.fill", temp: "20")
+                    ExtractedView(dayName: "Tue", 
+                                  imageName: "thermometer.sun",
+                                  temp: "76")
+                    ExtractedView(dayName: "Wed", 
+                                  imageName: "sun.max.fill",
+                                  temp: "100")
+                    ExtractedView(dayName: "Thus", 
+                                  imageName: "sun.rain.fill",
+                                  temp: "20")
                 }
                 Spacer()
-                WeatherButton(buttonText: "Change Daytime", foreGroundColor: .blue, backGroundColor: .white)
+                Button(action: {
+                    isNight.toggle()
+                }, label: {
+                    WeatherButton(buttonText: "Chnage Daytime", foreGroundColor: .blue, backGroundColor: .white)
+                })
                 Spacer()
             }.padding()
         }
@@ -34,9 +48,9 @@ struct ContentView: View {
 }
 
 struct MainWeatherStatusView: View{
+    
     var temperatue: String
     var imageName: String
-    
     
     var body: some View{
         VStack(spacing: 2){
@@ -110,16 +124,12 @@ struct WeatherButton: View{
     var backGroundColor: Color
     
     var body: some View{
-        Button(action: {
-            
-        }, label: {
-            Text(buttonText)
-                .font(.system(size: 16,weight: .bold))
-                .frame(width: 280, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .background(backGroundColor)
-                .cornerRadius(10.0)
-                .foregroundColor(foreGroundColor)
-        })
+        Text(buttonText)
+            .font(.system(size: 16,weight: .bold))
+            .frame(width: 280, height: 50, alignment: .center)
+            .background(backGroundColor)
+            .cornerRadius(10.0)
+            .foregroundColor(foreGroundColor)
     }
     
 }
